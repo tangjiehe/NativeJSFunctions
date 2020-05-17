@@ -58,6 +58,33 @@ function Promise(fn) {
       });
     }, 0);
   }
+  
+  this.then = function (onFulfilled, onRejected) {
+  var self = this;
+  return new Promise(function (resolve, reject) {
+    return self.done(function (result) {
+      if (typeof onFulfilled === 'function') {
+        try {
+          return resolve(onFulfilled(result));
+        } catch (ex) {
+          return reject(ex);
+        }
+      } else {
+        return resolve(result);
+      }
+    }, function (error) {
+      if (typeof onRejected === 'function') {
+        try {
+          return resolve(onRejected(error));
+        } catch (ex) {
+          return reject(ex);
+        }
+      } else {
+        return reject(error);
+      }
+    });
+  });
+}
 
   doResolve(fn, resolve, reject);
 }
