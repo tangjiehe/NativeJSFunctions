@@ -1,4 +1,4 @@
-Array.prototype.myReduct = function(callBack, initialValue) {
+Array.prototype.myReduce = function(callBack, initialValue) {
   var accumulator = (initialVal === undefined) ? undefined : initialVal;
     for (var i = 0; i < this.length; i++) {
         if (accumulator !== undefined)
